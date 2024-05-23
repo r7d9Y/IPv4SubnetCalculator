@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="IPv4SubnetCalculator:jar">
+    <output-path>$USER_HOME$/Downloads</output-path>
+    <root id="archive" name="IPv4SubnetCalculator.jar">
+      <element id="module-output" name="IPv4SubnetCalculator" />
+    </root>
+  </artifact>
+</component>

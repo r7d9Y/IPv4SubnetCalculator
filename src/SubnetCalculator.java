@@ -7,7 +7,7 @@
 import java.util.Scanner;
 
 public class SubnetCalculator {
-    private final static double version = 1.2;
+    private final static double version = 1.3;
 
     public static void main(String[] args) {
         System.out.printf("""
@@ -20,7 +20,7 @@ public class SubnetCalculator {
         do {
             Scanner scanner = new Scanner(System.in);
             System.out.print("\nInput: ");
-            String input = scanner.nextLine().strip().trim();
+            String input = scanner.nextLine().strip().trim().replace(" ", "");
 
             if (input.toLowerCase().contains("ex")) break;
             try {
@@ -36,26 +36,24 @@ public class SubnetCalculator {
 
                 Subnet subnet = new Subnet(input);
 
-                System.out.println("\nNetwork Address:   " + CYAN_BOLD + subnet.getNetAddress() + ANSI_RESET +
-                        "\nSubnet Mask:       " + RED_BOLD + subnet.getNetMask() +
-                        " (/" + (Subnet.intToString(subnet.getNetMask().getAsInt()).lastIndexOf("1") + 1) + ")" + ANSI_RESET +
-                        "\nBroadcast Address: " + WHITE_BOLD + subnet.getBroadcastAddr() + ANSI_RESET +
+                System.out.println("\nNetwork Address:   " + CYAN_BOLD + subnet.getNetAddress() +
+                        ANSI_RESET + "\nSubnet Mask:       " + RED_BOLD + subnet.getNetMask() +
+                        " (/" + (Subnet.intToString(subnet.getNetMask().getAsInt()).lastIndexOf("1") + 1) + ")" +
+                        ANSI_RESET + "\nBroadcast Address: " + WHITE_BOLD + subnet.getBroadcastAddr() + ANSI_RESET +
                         "\nNumber of Hosts:   " + GREEN_BOLD + subnet.getNumberOfHosts() + ANSI_RESET +
                         "\nFirst Host IP:     " + WHITE_BOLD + subnet.getFirstHostIp() + ANSI_RESET +
                         "\nLast Host IP:      " + WHITE_BOLD + subnet.getLastHostIp() + ANSI_RESET +
-                        "\nSubnet " + ANSI_WHITE + (subnet.isPrivateSubnet() ? "is" : "isn't") + ANSI_RESET
-                        + " a private subnet" + ANSI_RESET +
+                        "\nSubnet is private: " + WHITE_BOLD + (subnet.isPrivateSubnet() ? "yes" : "no") + ANSI_RESET +
                         "\nNext Subnet:       " + WHITE_BOLD + subnet.getNextSubnet().toString() + "\n" + ANSI_RESET);
 
             } catch (Exception e) {
-                System.out.println("Invalid Input!");
+                System.out.println(RED_BOLD + "\nInvalid Input! -> " + ANSI_RESET + input);
             }
 
         } while (true);
     }
 
     private static final String ANSI_RESET = "\u001B[0m";
-    private static final String ANSI_WHITE = "\u001B[37m";
     private static final String RED_BOLD = "\033[1;31m";
     private static final String GREEN_BOLD = "\033[1;32m";
     private static final String CYAN_BOLD = "\033[1;36m";
