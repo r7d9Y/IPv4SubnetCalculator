@@ -89,7 +89,7 @@ public class Subnet implements Comparable<Subnet> {
     }
 
     public int getNumberOfHosts() {
-        return ~mask.getAsInt() - 2;
+        return ~mask.getAsInt() - 1;
     }
 
     @Override
@@ -127,7 +127,7 @@ public class Subnet implements Comparable<Subnet> {
         return Arrays.stream(allIPs).anyMatch(allIP -> searchFor == allIP);
     }
 
-    protected boolean contains(IpAddress ip){
+    protected boolean contains(IpAddress ip) {
         return isInNetwork(ip);
     }
 
@@ -137,8 +137,7 @@ public class Subnet implements Comparable<Subnet> {
     }
 
     protected IpAddress getFirstHostIp() {
-        int[] ips = allIPs();
-        return new IpAddress(ips[1]);
+        return new IpAddress(addr.getAsInt() + 1);
     }
 
     protected IpAddress getLastHostIp() {
@@ -198,7 +197,8 @@ public class Subnet implements Comparable<Subnet> {
      * @return is an Array with all Addresses in network
      */
     protected static int[] getAllIpsInNetwork(int network, int suffix) {
-        if (suffix < 0 || suffix > 32) throw invalidSNMValue;
+        if (suffix < 0 || suffix > 32) throw new IllegalArgumentException("Illegal SNM");
+        if (suffix == 0) throw new IllegalArgumentException("Network to big to calculate all IPs!");
 
         network = getNetwork(network, suffix).getAsInt();
 

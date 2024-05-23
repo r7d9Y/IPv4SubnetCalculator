@@ -7,7 +7,7 @@
 import java.util.Scanner;
 
 public class SubnetCalculator {
-    private final static double version = 1.3;
+    private final static double version = 1.4;
 
     public static void main(String[] args) {
         System.out.printf("""
@@ -20,19 +20,19 @@ public class SubnetCalculator {
         do {
             Scanner scanner = new Scanner(System.in);
             System.out.print("\nInput: ");
-            String input = scanner.nextLine().strip().trim().replace(" ", "");
+            String input = scanner.nextLine().strip().trim();
 
             if (input.toLowerCase().contains("ex")) break;
             try {
                 String[] parts = !input.contains("/") ? input.split(" ", 2) : input.split("/", 2);
 
                 try {
-                    int snm = Integer.parseInt(parts[1]);
+                    int snm = Integer.parseInt(parts[1].trim());
                     if (snm >= 0 && snm <= 32) parts[1] = new IpAddress((~0) << (32 - snm)).toString();
                 } catch (Exception ignored) {
                 }
 
-                input = parts[0] + "/" + parts[1];
+                input = parts[0].trim() + "/" + parts[1].trim();
 
                 Subnet subnet = new Subnet(input);
 
@@ -43,11 +43,12 @@ public class SubnetCalculator {
                         "\nNumber of Hosts:   " + GREEN_BOLD + subnet.getNumberOfHosts() + ANSI_RESET +
                         "\nFirst Host IP:     " + WHITE_BOLD + subnet.getFirstHostIp() + ANSI_RESET +
                         "\nLast Host IP:      " + WHITE_BOLD + subnet.getLastHostIp() + ANSI_RESET +
-                        "\nSubnet is private: " + WHITE_BOLD + (subnet.isPrivateSubnet() ? "yes" : "no") + ANSI_RESET +
+                        "\nSubnet is private: " + WHITE_BOLD + (subnet.isPrivateSubnet() ? "Yes" : "No") + ANSI_RESET +
                         "\nNext Subnet:       " + WHITE_BOLD + subnet.getNextSubnet().toString() + "\n" + ANSI_RESET);
 
             } catch (Exception e) {
-                System.out.println(RED_BOLD + "\nInvalid Input! -> " + ANSI_RESET + input);
+                System.out.println(RED_BOLD + "\nInvalid Input! -> " + ANSI_RESET + input +
+                        RED_BOLD + " -> (" + e.getMessage() + ")" + ANSI_RESET);
             }
 
         } while (true);
