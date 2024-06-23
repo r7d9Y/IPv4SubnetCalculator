@@ -30,7 +30,7 @@ public class IpAddress implements Comparable<IpAddress> {
     }
 
     IpAddress(String ip) {
-        ip = ip.trim().strip();
+        ip = ip.trim();
         if (!isValidIPAddress(ip)) throw invalidValue;
 
         String[] octs = ip.split("[.]", 4);

@@ -10,17 +10,11 @@ public class SubnetCalculator {
     private final static double version = 1.4;
 
     public static void main(String[] args) {
-        System.out.printf("""
-                Subnet Calculator (version %.1f)
-                ----------------------------------------------------------
-                Write 'ex' to exit the program.
-                With this tool, you can calculate Ipv4 Subnets, the input should look like:
-                [IP] [CIDR] OR [IP]/[CIDR] OR [IP]/[Subnet Mask]
-                """, version);
+        System.out.printf("Subnet Calculator (version %.1f) \n----------------------------------------------------------\nWrite 'ex' to exit the program.\nWith this tool, you can calculate Ipv4 Subnets,\nthe input should look like:\n[IP] [CIDR] OR [IP]/[CIDR] OR [IP]/[Subnet Mask] ", version);
         do {
             Scanner scanner = new Scanner(System.in);
             System.out.print("\nInput: ");
-            String input = scanner.nextLine().strip().trim();
+            String input = scanner.nextLine().trim();
 
             if (input.toLowerCase().contains("ex")) break;
             try {

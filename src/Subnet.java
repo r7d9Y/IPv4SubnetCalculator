@@ -23,7 +23,7 @@ public class Subnet implements Comparable<Subnet> {
     private static final IllegalArgumentException invalidSNMValue = new IllegalArgumentException("Invalid SNM Value!");
 
     public Subnet(String s) {
-        s = s.trim().strip();
+        s = s.trim();
         try {
             String[] r = s.split("/", 2);
             if (IpAddress.isValidIPAddress(r[0]) && isValidSnm(new IpAddress(r[1]).getAsInt())) {
@@ -60,8 +60,8 @@ public class Subnet implements Comparable<Subnet> {
     }
 
     public Subnet(String s, String t) {
-        s = s.trim().strip();
-        t = t.trim().strip();
+        s = s.trim();
+        t = t.trim();
         Subnet r = new Subnet(s + "/" + t);
         addr = r.addr;
         mask = r.mask;
