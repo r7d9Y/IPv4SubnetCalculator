@@ -1,7 +1,7 @@
 /*
  * @author Rand7Y9Z@gmail.com
  * @since 2024
- * https://github.com/r7d9Y/R7Calc
+ * https://github.com/r7d9Y
  */
 
 import java.util.Scanner;
